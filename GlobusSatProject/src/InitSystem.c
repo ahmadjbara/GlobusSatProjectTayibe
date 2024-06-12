@@ -2,8 +2,9 @@
  * InitSystem.c
  *
  *  Created on: 25 במאי 2024
- *      Author: tariq
+ *      Author: 2022
  */
+
 
 #include "utils.h"
 #include <SubSystemModules\PowerManagment\EPS.h>
@@ -33,8 +34,7 @@ int StartTime(){
 		return logError(error,"Start-Time-Time-Start");
 	return 0;
 }
-
-void WriteDefaultValuesToFRAM(){
+oid WriteDefaultValuesToFRAM(){
 
 
 	FRAM_write(DEPLOYMENT_TIME,DEPLOYMENT_TIME_ADDR,DEPLOYMENT_TIME_SIZE);
@@ -53,15 +53,17 @@ void WriteDefaultValuesToFRAM(){
 
 
 }
-
 int Init_Drivers(){
-	return !(StartI2C() * StartSPI() * StartTIME());
+	StartI2C();
+	StartSPI();
+	StartTime();
 }
-int InitSubsystems(){
-	return !(StartFRAM() * EPS_Init());
+int Init_SubSystems(){
+	StartFRAM();
+	EPS_Init();
 }
 
-int InitSubsystems(){
+int InitSystems(){
 	Init_Drivers();
 	Init_SubSystems();
 }
