@@ -58,4 +58,8 @@ int InitSubsystems();
  */
 int DeploySystem();
 
+int InitSystems();
+
+int Init_Drivers();
+
 #endif /* INITSYSTEM_H_ */

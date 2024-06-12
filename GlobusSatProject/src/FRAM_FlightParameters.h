@@ -10,24 +10,33 @@
 
 #include <hal/Storage/FRAM.h>
 
+#define FALSE 0
+#define TRUE 1
+
 
 // <Satellite Management>
+
+#define DEPLOYMENT_TIME					30
 #define DEPLOYMENT_TIME_ADDR			0X05		//<! time at which the satellites starts deployment
 #define DEPLOYMENT_TIME_SIZE			4			//<! size of parameter in bytes
 
-#define SECONDS_SINCE_DEPLOY_ADDR		0x09		//<! counts how many seconds has past since wakup for use in deployment.
+#define SECONDS_SINCE_DEPLOY			0x0
+#define SECONDS_SINCE_DEPLOY_ADDR		0x09		//<! counts how many seconds has past since wake up for use in deployment.
 #define SECONDS_SINCE_DEPLOY_SIZE		4			//<! size of the parameter in bytes
 
-#define DEFAULT_NO_COMM_WDT_KICK_TIME  (7*24*60*60)	//<! number of seconds in X days
+#define DEFAULT_NO_COMM_WDT_KICK_TIME  (7*24*60*60)	//<! number of seconds in 7 days
 #define NO_COMM_WDT_KICK_TIME_ADDR  	0x24		///< number of seconds of no communications before GS WDT kick
 #define NO_COMM_WDT_KICK_TIME_SIZE		4
 
+#define STOP_REDEPOLOY_FLAG				FALSE
 #define STOP_REDEPOLOY_FLAG_ADDR		0x30		//<! stop calling ant deploy every 30 min flag
 #define STOP_REDEPOLOY_FLAG_SIZE		4			//<! length in bytes of
 
+//??
 #define MUTE_END_TIME_ADDR				0x36		//<! mute end time
 #define MUTE_END_TIME_SIZE				4			//<! length in bytes of
 
+#define FIRST_ACTIVATION_FLAG			FALSE
 #define FIRST_ACTIVATION_FLAG_ADDR		0x42		//<! is this the first activation after launch flag
 #define FIRST_ACTIVATION_FLAG_SIZE		4			//<! length in bytes of FIRST_ACTIVATION_FLAG
 
