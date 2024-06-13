@@ -29,7 +29,7 @@ if(err != E_NO_SS_ERR)
 	printf("f_entersFS error:",err);
 
 //init the volume of SD card 0(A)
-
+ // todo make indentation
 err=f_initvolume(0,atmel_mcipdc_initfunc,SD_CARD_DRIVER_PRI);
 if(err!=E_NO_SS_ERR)
 	printf("f_initvoulume primary error :%d\n",err);

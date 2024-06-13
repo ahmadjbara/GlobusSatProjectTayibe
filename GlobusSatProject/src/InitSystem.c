@@ -10,6 +10,7 @@
 #include <SubSystemModules\PowerManagment\EPS.h>
 #include <hal\Drivers\I2C.h>
 #include <hal\Drivers\SPI.h>
+#include <InitSystem.h>
 
 #define BusSpeed_Hz 100000
 #define Timeout 10
@@ -23,7 +24,9 @@ int StartI2C(){
 }
 
 int StartSPI(){
-	return logError(SPI_start(bus0_spi, slave0_spi),"Start_SPI");
+
+     //todo: make sure that the first parameter is both_spi
+	return logError(SPI_start(both_spi, slave0_spi),"Start_SPI");
 }
 
 int StartTime(){
@@ -34,7 +37,7 @@ int StartTime(){
 		return logError(error,"Start-Time-Time-Start");
 	return 0;
 }
-oid WriteDefaultValuesToFRAM(){
+void WriteDefaultValuesToFRAM(){
 
 
 	FRAM_write(DEPLOYMENT_TIME,DEPLOYMENT_TIME_ADDR,DEPLOYMENT_TIME_SIZE);
@@ -56,13 +59,15 @@ oid WriteDefaultValuesToFRAM(){
 int Init_Drivers(){
 	StartI2C();
 	StartSPI();
+	StartFRAM();
 	StartTime();
+
 }
 int Init_SubSystems(){
-	StartFRAM();
 	EPS_Init();
+	InitializeFS();
+	InitTrxvu();
 }
-
 int InitSystems(){
 	Init_Drivers();
 	Init_SubSystems();

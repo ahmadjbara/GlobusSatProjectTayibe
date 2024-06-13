@@ -9,8 +9,11 @@
 
 
 #include <satellite-subsystems/IsisAntS.h>
+#include <satellite-subsystems/IsisTRXVU.h>
 
-#include <TRXVU.h>
+
+#include "TRXVU.h"
+#include "utils.h"
 
 int InitTrxvu(){
 	ISIStrxvuI2CAddress myTRXVUAddress;
@@ -36,11 +39,12 @@ int InitTrxvu(){
     myAntennaAddress.addressSideB=ANTS_I2C_SIDE_B_ADDR;
 
     //init the ants sysytem
-    if(logError(IsisTrxvu_initialize(&myAntennaAddress,1),"InitTrxvu-IsisAntS_initialize"))
+    if(logError(IsisTrxvu_initialize(&myAntennaAddress,&myTRXVUFramesLength,&myTRXVUBitrates,1),"InitTrxvu-IsisAntS_initialize"))
     	return -1;
-    InitTxModule();
-    InitBeaconParams();
-    InitSemaphores();
+//
+//  InitTxModule();
+//    InitBeaconParams();
+//    InitSemaphores();
     //checkTransponderStart();//let us see if we need to turn on the tx
 
 return 0;

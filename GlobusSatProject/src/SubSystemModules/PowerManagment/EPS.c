@@ -45,10 +45,11 @@ int EPS_Conditioning(){
 	        GetBatteryVoltage(&response1);
 			voltage_t Current_volt = GetFilterVoltage(response1);
 
-			if(prev_avg == -1){
-				prev_avg = Current_volt;
-				return 0;
-			}
+//			if(prev_avg == -1){
+//				prev_avg = Current_volt;
+//				return 0;
+//			}
+			// todo mv or volt
 			if(Current_volt - prev_avg > 0) {
 				if(Current_volt >= 7.5)
 					printf("\t Full");
@@ -69,10 +70,10 @@ int EPS_Conditioning(){
 			prev_avg = Current_volt;
 			return 0;
 }
-
+ // todo alpha must be a double value
 int UpdateAlpha(sat_packet_t *cmd){
 
-	int new_alpha = alpha;
+	float new_alpha = *((float*)cmd->data);
 	if(new_alpha < 0 || new_alpha >1)
 		return logError(-2, "UpdateAlpha");
 	int err= logError(FRAM_write((unsigned char*)&new_alpha , EPS_ALPHA_FILTER_VALUE_ADDR , EPS_ALPHA_FILTER_VALUE_SIZE));
