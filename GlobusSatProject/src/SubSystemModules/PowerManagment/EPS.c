@@ -8,7 +8,8 @@
 #include <satellite-subsystems/imepsv2_piu_types.h>
 #include <hal\Drivers\SPI.h>
 #include <FRAM_FlightParameters.h>
-
+#include "utils.h"
+#include <satellite-subsystems/GomEPS.h>
 
 #define GetFilterVoltage(curr_voltage) (voltage_t)(alpha * curr_voltage + (1-alpha) * prev_avg)
 
@@ -18,6 +19,29 @@ int UpdateAlpha(sat_packet_t *);
 
 double prev_avg = 0;
 float alpha = 0;
+
+#ifdef GoM
+int EPS_Init(){
+	 unsigned char i2c_address = 0x02;
+	 int rv;
+
+	 rv = GomEpsInitialize(&i2c_address, 1);
+	 if(rv != E_NO_SS_ERR && rv != E_IS_INITIALIZED)
+	 {
+		 if (logError(rv, "GomEpsInitialize() failed" ))
+			 return -1;
+	 }
+
+	 if(GetAlpha(&alpha)){
+	    	alpha = DEFAULT_ALPHA_VALUE;
+	    }
+
+	    prev_avg = 0;
+	    GetBatteryVoltage(&prev_avg);
+
+	 return 0;
+}
+#else
 int EPS_Init(){
 
 	IMEPSV2_PIU_t i2c_address;
@@ -38,11 +62,14 @@ int EPS_Init(){
 
     return 0;
 }
-
-
+#endif
 int EPS_Conditioning(){
 	        voltage_t response1;
+		#ifdef GoM
+	        GoM_GetBatteryVoltage(&response1);
+		#else
 	        GetBatteryVoltage(&response1);
+		#endif
 			voltage_t Current_volt = GetFilterVoltage(response1);
 
 //			if(prev_avg == -1){
@@ -76,25 +103,50 @@ int UpdateAlpha(sat_packet_t *cmd){
 	float new_alpha = *((float*)cmd->data);
 	if(new_alpha < 0 || new_alpha >1)
 		return logError(-2, "UpdateAlpha");
-	int err= logError(FRAM_write((unsigned char*)&new_alpha , EPS_ALPHA_FILTER_VALUE_ADDR , EPS_ALPHA_FILTER_VALUE_SIZE));
+	int err= logError(FRAM_write((unsigned char*)&new_alpha , EPS_ALPHA_FILTER_VALUE_ADDR , EPS_ALPHA_FILTER_VALUE_SIZE), "Error writing alpha");
 	if(err== E_NO_SS_ERR)
 		GetAlpha(&alpha);
 	return err;
 }
 
 int GetBatteryVoltage(voltage_t * c){
-	imepsv2_piu__gethousekeepingeng__from_t hk_tlm;
 
-	//if(logError(imepsv2_piu__gethousekeepingeng__from_t(EPS_I2C_BUS_INDEX , &hk_tlm) , "EPS "))
-	return 0;
+	    imepsv2_piu__gethousekeepingeng__from_t response;
+
+		int error = imepsv2_piu__gethousekeepingeng(0,&response);
+		if( error )
+		{
+			logError(error, "imepsv2_piu__gethousekeepingeng(...) return error" );
+			return -1;
+		}
+
+		*c =  response.fields.batt_input.fields.volt;
+
+		return 0;
 }
 
+int Gom_GetBatteryVoltage(voltage_t * c){
+
+	    gom_eps_hk_t response;
+
+		int error = GomEpsGetHkData_general(0,&response);
+		if( error )
+		{
+			if (logError(error, "imepsv2_piu__gethousekeepingeng(...) return error" ))
+			return -1;
+			return 0;
+		}
+
+		*c =  response.fields.vbatt;
+
+		return 0;
+}
 
 
 int GetAlpha(float *alpha){
 	if(NULL == alpha)
 		return E_INPUT_POINTER_NULL;
-	if(logError(FRAM_read((unsigned char*)&alpha , EPS_ALPHA_FILTER_VALUE_ADDR , EPS_ALPHA_FILTER_VALUE_SIZE)))
+	if(logError(FRAM_read((unsigned char*)&alpha , EPS_ALPHA_FILTER_VALUE_ADDR , EPS_ALPHA_FILTER_VALUE_SIZE), "Error reading alpha"))
 		return -1;
 	return 0;
 }

@@ -33,7 +33,9 @@ if(err != E_NO_SS_ERR)
 err=f_initvolume(0,atmel_mcipdc_initfunc,SD_CARD_DRIVER_PRI);
 if(err!=E_NO_SS_ERR)
 	printf("f_initvoulume primary error :%d\n",err);
+
 DeInitializeFS(SD_CARD_DRIVER_PRI);
+
 hcc_mem_init();
 fs_init();
 f_enterFS();
