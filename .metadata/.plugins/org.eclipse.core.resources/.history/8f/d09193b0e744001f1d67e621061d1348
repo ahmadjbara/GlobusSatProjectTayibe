@@ -1,0 +1,23 @@
+/*
+ * CommandDictionary.c
+ *
+ *  Created on: Jul 18, 2024
+ *      Author: tariq
+ */
+
+
+#include "CommandDictionary.h"
+
+int trxvu_command_router(sat_packet_t *cmd){
+
+}
+
+
+int eps_command_router(sat_packet_t *cmd){
+
+}
+
+
+int telemetry_command_router(sat_packet_t *cmd){
+
+}

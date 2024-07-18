@@ -1,0 +1,7 @@
+13:44:29 **** Clean-only build of configuration Debug for project hal-demo ****
+make -r -k clean 
+rm -rf  hal-demo.siz  ./src/Tests/ADCtest.o ./src/Tests/FloatingPointTest.o ./src/Tests/I2CslaveTest.o ./src/Tests/I2Ctest.o ./src/Tests/LEDtest.o ./src/Tests/PWMtest.o ./src/Tests/PinTest.o ./src/Tests/RTTAlarm.o ./src/Tests/SDCardTest.o ./src/Tests/SPI_FRAM_RTCtest.o ./src/Tests/SupervisorTest.o ./src/Tests/ThermalTest.o ./src/Tests/TimeTest.o ./src/Tests/UARTtest.o ./src/Tests/USBdeviceTest.o ./src/Tests/boardTest.o ./src/Tests/checksumTest.o  ./src/Demo/demo_sd.o ./src/Demo/demo_uart.o  ./src/example-aborthandler.o ./src/freertos_hooks.o ./src/main.o  ./src/Tests/ADCtest.d ./src/Tests/FloatingPointTest.d ./src/Tests/I2CslaveTest.d ./src/Tests/I2Ctest.d ./src/Tests/LEDtest.d ./src/Tests/PWMtest.d ./src/Tests/PinTest.d ./src/Tests/RTTAlarm.d ./src/Tests/SDCardTest.d ./src/Tests/SPI_FRAM_RTCtest.d ./src/Tests/SupervisorTest.d ./src/Tests/ThermalTest.d ./src/Tests/TimeTest.d ./src/Tests/UARTtest.d ./src/Tests/USBdeviceTest.d ./src/Tests/boardTest.d ./src/Tests/checksumTest.d  ./src/Demo/demo_sd.d ./src/Demo/demo_uart.d  ./src/example-aborthandler.d ./src/freertos_hooks.d ./src/main.d  hal-demo.bin  hal-demo.elf
+ 
+
+13:44:30 Build Finished (took 190ms)
+

@@ -49,7 +49,7 @@ int StartTIME();
  * @return	0 successful init
  * 			-1 failed at init
  */
-int InitSubsystems();
+int Init_Subsystems();
 
 /*!
  * @brief	deployment procedure

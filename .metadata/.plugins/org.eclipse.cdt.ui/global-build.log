@@ -1,0 +1,40 @@
+13:45:52 **** Incremental Build of configuration Debug for project GlobusSatProject ****
+make -r -k all 
+Building target: GlobusSatProject.elf
+Invoking: Cross ARM C Linker
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -T C:/ISIS/workspace/GlobusSatProject/..//hal/at91/linker-scripts/sdram.lds -nostartfiles -Xlinker --gc-sections -L"C:/ISIS/workspace/GlobusSatProject/..//hal/at91/lib" -L"C:/ISIS/workspace/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/lib" -L"C:/ISIS/workspace/GlobusSatProject/..//hal/hcc/lib" -L"C:/ISIS/workspace/GlobusSatProject/..//hal/freertos/lib" -L"C:/ISIS/workspace/GlobusSatProject/..//hal/hal/lib" -Wl,-Map,"GlobusSatProject.map" -lc -u _printf_float -u _scanf_float -o "GlobusSatProject.elf"  ./src/SubSystemModules/PowerManagment/EPS.o  ./src/SubSystemModules/Communication/CommandDictionary.o ./src/SubSystemModules/Communication/SatCommandHandler.o ./src/SubSystemModules/Communication/TRXVU.o  ./src/InitSystem.o ./src/TLM_management.o ./src/main.o ./src/utils.o   -lHALD -lHCCD -lSatelliteSubsystemsD -lFreeRTOSD -lAt91D
+c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-writer.o): In function `_write_r':
+writer.c:(.text._write_r+0x20): undefined reference to `_write'
+c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-closer.o): In function `_close_r':
+closer.c:(.text._close_r+0x18): undefined reference to `_close'
+c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-lseekr.o): In function `_lseek_r':
+lseekr.c:(.text._lseek_r+0x20): undefined reference to `_lseek'
+c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-readr.o): In function `_read_r':
+readr.c:(.text._read_r+0x20): undefined reference to `_read'
+c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-fstatr.o): In function `_fstat_r':
+fstatr.c:(.text._fstat_r+0x1c): undefined reference to `_fstat'
+c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-isattyr.o): In function `_isatty_r':
+isattyr.c:(.text._isatty_r+0x18): undefined reference to `_isatty'
+collect2.exe: error: ld returned 1 exit status
+make: *** [GlobusSatProject.elf] Error 1
+make: Target `all' not remade because of errors.
+13:50:05 **** Incremental Build of configuration Debug for project GlobusSatProject ****
+make -r -k all 
+Building target: GlobusSatProject.elf
+Invoking: Cross ARM C Linker
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -T C:/ISIS/workspace/GlobusSatProject/..//hal/at91/linker-scripts/sdram.lds -nostartfiles -Xlinker --gc-sections -L"C:/ISIS/workspace/GlobusSatProject/..//hal/at91/lib" -L"C:/ISIS/workspace/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/lib" -L"C:/ISIS/workspace/GlobusSatProject/..//hal/hcc/lib" -L"C:/ISIS/workspace/GlobusSatProject/..//hal/freertos/lib" -L"C:/ISIS/workspace/GlobusSatProject/..//hal/hal/lib" -Wl,-Map,"GlobusSatProject.map" -lc -u _printf_float -u _scanf_float -o "GlobusSatProject.elf"  ./src/SubSystemModules/PowerManagment/EPS.o  ./src/SubSystemModules/Communication/CommandDictionary.o ./src/SubSystemModules/Communication/SatCommandHandler.o ./src/SubSystemModules/Communication/TRXVU.o  ./src/InitSystem.o ./src/TLM_management.o ./src/main.o ./src/utils.o   -lHALD -lHCCD -lSatelliteSubsystemsD -lFreeRTOSD -lAt91D
+c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-writer.o): In function `_write_r':
+writer.c:(.text._write_r+0x20): undefined reference to `_write'
+c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-closer.o): In function `_close_r':
+closer.c:(.text._close_r+0x18): undefined reference to `_close'
+c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-lseekr.o): In function `_lseek_r':
+lseekr.c:(.text._lseek_r+0x20): undefined reference to `_lseek'
+c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-readr.o): In function `_read_r':
+readr.c:(.text._read_r+0x20): undefined reference to `_read'
+c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-fstatr.o): In function `_fstat_r':
+fstatr.c:(.text._fstat_r+0x1c): undefined reference to `_fstat'
+c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-isattyr.o): In function `_isatty_r':
+isattyr.c:(.text._isatty_r+0x18): undefined reference to `_isatty'
+collect2.exe: error: ld returned 1 exit status
+make: *** [GlobusSatProject.elf] Error 1
+make: Target `all' not remade because of errors.

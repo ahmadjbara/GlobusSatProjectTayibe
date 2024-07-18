@@ -10,7 +10,7 @@
 
 #include <satellite-subsystems/IsisAntS.h>
 #include <satellite-subsystems/IsisTRXVU.h>
-
+#include "SatCommandHandler.h"
 
 #include "TRXVU.h"
 #include "utils.h"
@@ -48,6 +48,39 @@ int InitTrxvu(){
     //checkTransponderStart();//let us see if we need to turn on the tx
 
 return 0;
+}
+
+
+int TRX_Logic(){
+	int frames=GetNumberOfFramesInBuffer();
+	sat_packet_t cmd= {0};
+	if(frames > 0){
+		GetOnlineCommand(&cmd);
+		ActUponCommand(&cmd);
+	}
+
+}
+
+int GetNumberOfFramesInBuffer(){
+	unsigned short RxCounter=0;
+	logError(IsisTrxvu_rcGetFrameCount(0,&RxCounter),"IsisTrxvu_rcGetFrameCount");
+	return RxCounter;
+}
+
+int GetOnlineCommand(sat_packet_t *cmd){
+	if (cmd == NULL)
+		return -1;
+	unsigned char rxframebuffer[SIZE_RXFRAME]={0};
+	ISIStrxvuRxFrame rxFrameCmd= {0,0,0,rxframebuffer};
+	logError(IsisTrxvu_rcGetFrameCount(0,&rxframebuffer),"IsisTrxvu_rcGetFrameCount");
+	int err=ParseDataToCommand(rxFrameCmd.rx_framedata,cmd);
+	return err;
+}
+
+int TransmitSplPacket(sat_packet_t *packet, int *avalFrames){
+
+	return logError(IsisTrxvu_tcSendAX25DefClSign(0,packet->data,packet->length,avalFrames),"IsisTrxvu_tcSendAX25DefClSign");
+
 }
 
 

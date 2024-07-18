@@ -11,7 +11,6 @@
 #include <hal/Storage/FRAM.h>
 
 #define FALSE 0
-#define TRUE 1
 
 
 // <Satellite Management>

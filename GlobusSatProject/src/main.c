@@ -44,6 +44,7 @@ void taskmain(){
 
 	while(TRUE){
 		EPS_Conditioning();
+		TRX_Logic();
 		vTaskDelay(10);
 	}
 }
